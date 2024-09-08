@@ -15,9 +15,14 @@ html {
     width: 512px;
 }
 
+#container {
+    width: 100%;
+}
+
 #crepe_holder{
     margin-left: 10%;
     margin-right: 45%;
+    height: auto;
 }
 
 .crepe {
