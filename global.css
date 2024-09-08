@@ -43,8 +43,3 @@ html {
     height: 50%;
     opacity: 25%;
 }
-
-#crepe_holder > #id1 {
-    background: green;
-    width: 25%;
-}

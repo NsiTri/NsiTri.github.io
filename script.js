@@ -1,7 +1,53 @@
 const spatula = document.getElementById("spatula");
 const crepe_holder = document.getElementById("crepe_holder")
 const container = document.getElementById("container");
-    
+
+let crepes_number = 5
+
+
+
+function displayCrepes() {
+  let crepes = crepe_holder.querySelectorAll(".crepe")
+  crepe_template = crepes[0]
+
+
+  crepes.forEach((crepe) => {
+    crepe.remove()
+  });
+
+  for (let i = 0; i < crepes_number; i++) {
+    clone = crepe_template.cloneNode(true);
+    clone.id = "id" + toString(i);
+    crepe_holder.appendChild(clone)
+  }
+}
+
+
+
+
+function randomizeCrepes() {
+  let crepes = crepe_holder.querySelectorAll(".crepe")
+
+  for (i = 0; i<crepes.length; i++){
+
+    let step = ((i+1)/crepes.length)
+    crepes[i].style.width = Math.round(step * 100).toString() + "%"
+    crepes[i].style.backgroundColor = "hsl(" + (Math.round((step * 360))-1).toString() + ", 100%, 50%)"
+  }
+
+
+}
+
+
+
+
+function onLoad() {
+  displayCrepes()
+  randomizeCrepes()
+}
+
+document.body.onload = onLoad;
+
 container.addEventListener("mousemove", (event) => {
   const siblings = Array.from(crepe_holder.children).filter(div => div !== spatula);
   // Get the y position of the mouse
