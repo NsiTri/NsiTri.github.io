@@ -2,9 +2,11 @@ const spatula = document.getElementById("spatula");
 const crepe_holder = document.getElementById("crepe_holder")
 const container = document.getElementById("container");
 
-let crepes_number = 5
+let crepes_number = 12
 
 
+
+//---------- SETUP ----------------------------------------------------------------
 
 function displayCrepes() {
   let crepes = crepe_holder.querySelectorAll(".crepe")
@@ -17,7 +19,7 @@ function displayCrepes() {
 
   for (let i = 0; i < crepes_number; i++) {
     clone = crepe_template.cloneNode(true);
-    clone.id = "id" + toString(i);
+    clone.id = "id" + i;
     crepe_holder.appendChild(clone)
   }
 }
@@ -25,7 +27,7 @@ function displayCrepes() {
 
 
 
-function randomizeCrepes() {
+function generateCrepes() {
   let crepes = crepe_holder.querySelectorAll(".crepe")
 
   for (i = 0; i<crepes.length; i++){
@@ -34,46 +36,122 @@ function randomizeCrepes() {
     crepes[i].style.width = Math.round(step * 100).toString() + "%"
     crepes[i].style.backgroundColor = "hsl(" + (Math.round((step * 360))-1).toString() + ", 100%, 50%)"
   }
-
-
 }
 
+
+
+function randomizeCrepes() {
+
+  let crepes = Array.prototype.slice.call(crepe_holder.querySelectorAll(".crepe"));
+  
+  //supprime toutes les crepes
+  crepes.forEach((crepe) => {
+    crepe_holder.removeChild(crepe);
+  })
+
+  //mélange la liste
+  shuffleArray(crepes);
+
+
+  //remet les crepes mélangées
+  crepes.forEach((crepe) => {
+    crepe_holder.appendChild(crepe);
+
+    //coté aléatoire
+    if (Math.random() > 0.5) {
+      crepe.style.rotate = "180deg"
+    }
+  })
+}
+
+
+
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
 
 
 
 function onLoad() {
   displayCrepes()
+  generateCrepes()
   randomizeCrepes()
 }
 
 document.body.onload = onLoad;
 
+//------ INPUTS ---------------------------------------------------------
+
+
+
+
 container.addEventListener("mousemove", (event) => {
-  const siblings = Array.from(crepe_holder.children).filter(div => div !== spatula);
-  // Get the y position of the mouse
+  const crepes = crepe_holder.querySelectorAll(".crepe");
   const mouseY = event.clientY;
 
-  // Loop through all siblings to find the closest one to the mouse
-  let closestSibling = siblings[0];
-  let closestDistance = Math.abs(mouseY - closestSibling.getBoundingClientRect().y);
+  let closest_crepe = crepes[0];
+  let closest_distance = Math.abs(mouseY - closest_crepe.getBoundingClientRect().y);
 
-  siblings.forEach((sibling) => {
-    const siblingY = sibling.getBoundingClientRect().y;
-    const distance = Math.abs(mouseY - siblingY);
+  crepes.forEach((crepe) => {
+    const crepe_y = crepe.getBoundingClientRect().y;
+    const distance = Math.abs(mouseY - crepe_y);
 
-    if (distance < closestDistance) {
-      closestSibling = sibling;
-      closestDistance = distance;
+    if (distance < closest_distance) {
+      closest_crepe = crepe;
+      closest_distance = distance;
     }
   });
 
-  
 
-  // Insert the moving div before or after the closest sibling depending on the position
-  const siblingRect = closestSibling.getBoundingClientRect();
-  if (mouseY < siblingRect.y + siblingRect.height / 2) {
-    crepe_holder.insertBefore(spatula, closestSibling);
+  const crepe_rect = closest_crepe.getBoundingClientRect();
+  if (mouseY < crepe_rect.y + crepe_rect.height / 2) {
+    crepe_holder.insertBefore(spatula, closest_crepe);
   } else {
-    crepe_holder.insertBefore(spatula, closestSibling.nextSibling);
+    crepe_holder.insertBefore(spatula, closest_crepe.nextSibling);
   }
 });
+
+
+
+
+
+function reverse_crepes(crepes){
+
+  //supprime les crepes du dessus
+  crepes.forEach((crepe) => {
+    crepe_holder.removeChild(crepe);
+  })
+  
+  //remet les crepes au dessus
+  crepes.forEach((crepe) => {
+    crepe_holder.insertBefore(crepe, crepe_holder.firstChild);
+    if (crepe.style.rotate === "180deg"){
+      crepe.style.rotate = "0deg"
+    } else {
+      crepe.style.rotate = "180deg"
+    }
+   
+  })
+}
+
+
+
+container.addEventListener("mousedown", (event) => {
+  const mouseY = event.clientY
+
+  let top_crepes = []
+
+  for (let crepe of crepe_holder.children) {
+    if (crepe.id === "spatula") {break}
+    top_crepes.push(crepe)
+  }
+
+  reverse_crepes(top_crepes)
+}) 

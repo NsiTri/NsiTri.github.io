@@ -39,7 +39,7 @@ html {
 }
 
 .crepe > .bottom {
-    background: white;
+    background: black;
     height: 50%;
-    opacity: 25%;
+    opacity: 50%
 }
