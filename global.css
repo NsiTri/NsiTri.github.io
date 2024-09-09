@@ -11,7 +11,7 @@ h1 {
 }
 
 img{
-    width : 50%
+    width : 30%
 }
 
 p {
@@ -111,5 +111,6 @@ a:hover {color: darkcyan}
 
 .moreinfo {
     font-style: italic;
-    font-size: 50%;
+    text-align: center;
+    font-size: medium;
 }
