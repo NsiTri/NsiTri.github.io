@@ -6,6 +6,25 @@ html {
     font-size: larger;
 }
 
+h1 {
+    font-family: 'Gill Sans MT', sans-serif
+}
+
+img{
+    width : 50%
+}
+
+p {
+    width: 66%;
+    margin: auto;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.images{
+    width : 50%;
+}
+
 #spatula {
     margin-left: 100%;
 }
@@ -51,7 +70,6 @@ html {
     margin: 0%;
     z-index: 99;
     position: relative;
-    background-color: #444444;
     display: flex;
     justify-content: center;
   }
@@ -86,3 +104,12 @@ html {
     color: white;
     display: block;
   }
+
+a:link {color: red}
+a:visited {color: blueviolet}
+a:hover {color: darkcyan}
+
+.moreinfo {
+    font-style: italic;
+    font-size: 50%;
+}
