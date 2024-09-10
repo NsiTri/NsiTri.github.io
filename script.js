@@ -1,14 +1,18 @@
 const spatula = document.getElementById("spatula");
 const crepe_holder = document.getElementById("crepe_holder")
 const container = document.getElementById("container");
+const number_box = document.getElementById("number_selector")
 
-let crepes_number = 12
 
+let crepes_number = number_box.value
+
+const MIN_CREPES = 3
+const MAX_CREPES = 50
 
 
 //---------- SETUP ----------------------------------------------------------------
 
-function displayCrepes() {
+function generateCrepes() {
   let crepes = crepe_holder.querySelectorAll(".crepe")
   crepe_template = crepes[0]
 
@@ -27,7 +31,7 @@ function displayCrepes() {
 
 
 
-function generateCrepes() {
+function textureCrepes() {
   let crepes = crepe_holder.querySelectorAll(".crepe")
 
   for (i = 0; i<crepes.length; i++){
@@ -79,13 +83,13 @@ function shuffleArray(array) {
 
 
 
-function onLoad() {
-  displayCrepes()
+function setup_crepes() {
   generateCrepes()
+  textureCrepes()
   randomizeCrepes()
 }
 
-document.body.onload = onLoad;
+document.body.onload = setup_crepes;
 
 //------ INPUTS ---------------------------------------------------------
 
@@ -155,3 +159,24 @@ container.addEventListener("mousedown", (event) => {
 
   reverse_crepes(top_crepes)
 }) 
+
+
+number_box.addEventListener("input", () => {
+  crepes_number = number_box.value
+
+  if (crepes_number < MIN_CREPES) {
+
+    crepes_number = MIN_CREPES
+
+  } else if (crepes_number > MAX_CREPES) {
+
+    crepes_number = MAX_CREPES
+
+  }
+
+  setup_crepes()
+})
+
+number_box.addEventListener("focusout", () => {
+  number_box.value = crepes_number
+})
