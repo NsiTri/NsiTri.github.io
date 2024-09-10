@@ -159,3 +159,26 @@ a:hover {color: darkcyan}
     text-align: center;
     font-size: medium;
 }
+
+.rules{
+    display: flex;
+    flex:1%;
+    float: left;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
+    
+}
+
+.rules img{
+    margin-top: 2%;
+    margin-right: 8%;
+    width: 25%;
+}
+
+.rules p{
+    margin-right: 10%;
+    width : 65%;
+    margin-left: 5%;
+    flex: 1;
+}
