@@ -5,6 +5,7 @@ const number_box = document.getElementById("number_selector")
 
 
 let crepes_number = number_box.value
+let is_spatula_moving = false
 
 const MIN_CREPES = 3
 const MAX_CREPES = 50
@@ -12,15 +13,17 @@ const MAX_CREPES = 50
 
 //---------- SETUP ----------------------------------------------------------------
 
+
+//génère crepes_number crêpes identiques
 function generateCrepes() {
   let crepes = crepe_holder.querySelectorAll(".crepe")
   crepe_template = crepes[0]
 
 
-  crepes.forEach((crepe) => {
+  for (let crepe of crepes){
     crepe.remove()
-  });
-
+  }
+  
   for (let i = 0; i < crepes_number; i++) {
     clone = crepe_template.cloneNode(true);
     clone.id = "id" + i;
@@ -29,8 +32,7 @@ function generateCrepes() {
 }
 
 
-
-
+// colore les crepes et change leur taille en fonction de leur position
 function textureCrepes() {
   let crepes = crepe_holder.querySelectorAll(".crepe")
 
@@ -44,28 +46,26 @@ function textureCrepes() {
 
 
 
+//mélange toutes les crepes et leur coté
 function randomizeCrepes() {
 
   let crepes = Array.prototype.slice.call(crepe_holder.querySelectorAll(".crepe"));
   
-  //supprime toutes les crepes
-  crepes.forEach((crepe) => {
+  for (let crepe of crepes){
     crepe_holder.removeChild(crepe);
-  })
+  }
 
-  //mélange la liste
   shuffleArray(crepes);
 
 
-  //remet les crepes mélangées
-  crepes.forEach((crepe) => {
+  for (let crepe of crepes){
     crepe_holder.appendChild(crepe);
 
     //coté aléatoire
     if (Math.random() > 0.5) {
       crepe.style.rotate = "180deg"
     }
-  })
+  }
 }
 
 
@@ -82,7 +82,7 @@ function shuffleArray(array) {
 }
 
 
-
+//fonction qui met les crepes aléatoires en place
 function setup_crepes() {
   generateCrepes()
   textureCrepes()
@@ -95,15 +95,19 @@ document.body.onload = setup_crepes;
 
 
 
+//calcule ou intercaler la spatule quand la souris bouge
+
 
 container.addEventListener("mousemove", (event) => {
+  if (is_spatula_moving){return}
+  
   const crepes = crepe_holder.querySelectorAll(".crepe");
   const mouseY = event.clientY;
 
   let closest_crepe = crepes[0];
   let closest_distance = Math.abs(mouseY - closest_crepe.getBoundingClientRect().y);
 
-  crepes.forEach((crepe) => {
+  for (let crepe of crepes){
     const crepe_y = crepe.getBoundingClientRect().y;
     const distance = Math.abs(mouseY - crepe_y);
 
@@ -111,7 +115,7 @@ container.addEventListener("mousemove", (event) => {
       closest_crepe = crepe;
       closest_distance = distance;
     }
-  });
+  }
 
 
   const crepe_rect = closest_crepe.getBoundingClientRect();
@@ -126,34 +130,62 @@ container.addEventListener("mousemove", (event) => {
 
 
 
+//fonction qui retourne les crepes de l'array crepes
 function reverse_crepes(crepes){
-
-  //supprime les crepes du dessus
-  crepes.forEach((crepe) => {
-    crepe_holder.removeChild(crepe);
-  })
   
-  //remet les crepes au dessus
-  crepes.forEach((crepe) => {
-    crepe_holder.insertBefore(crepe, crepe_holder.firstChild);
-    if (crepe.style.rotate === "180deg"){
-      crepe.style.rotate = "0deg"
-    } else {
-      crepe.style.rotate = "180deg"
+  let rotating_div = document.createElement("div")
+  crepe_holder.insertBefore(rotating_div, crepe_holder.firstChild)
+
+  for (let crepe of crepes){
+    rotating_div.appendChild(crepe)
+  }
+
+
+  rotating_div.classList.add('rotate');
+
+  is_spatula_moving = true
+
+
+  //quand l'anim est finie, on appelle la fonction
+  //la rotation est seulement visuelle, donc quand elle se termine on doit tout changer a la main
+  setTimeout(() => {
+    rotating_div.classList.remove('rotate');
+
+    for (let crepe of crepes){
+      crepe_holder.insertBefore(crepe, crepe_holder.firstChild);
+
+      if (crepe.style.rotate === "180deg"){
+        crepe.style.rotate = "0deg"
+      } else {
+        crepe.style.rotate = "180deg"
+      }
+
+      spatula.style.rotate = "0deg"
     }
-   
-  })
+
+    is_spatula_moving = false
+
+    crepe_holder.removeChild(rotating_div)
+  }, 500); //in ms, change it in css too
+
 }
 
 
-
+//Retournage des crepes quand l'utilisateur clique
 container.addEventListener("mousedown", (event) => {
-  const mouseY = event.clientY
 
+  if (is_spatula_moving){return}
+
+  const mouseY = event.clientY
   let top_crepes = []
 
-  for (let crepe of crepe_holder.children) {
-    if (crepe.id === "spatula") {break}
+  for (crepe of crepe_holder.children) {
+
+    if (crepe.id === "spatula") {
+      top_crepes.push(crepe); //on ajoute la spatule pour la rotation
+      break
+    }
+
     top_crepes.push(crepe)
   }
 
@@ -161,21 +193,24 @@ container.addEventListener("mousedown", (event) => {
 }) 
 
 
+//Changer le nombre de crepes quand on change le nombre dans la boite
 number_box.addEventListener("input", () => {
+
   crepes_number = number_box.value
 
   if (crepes_number < MIN_CREPES) {
-
     crepes_number = MIN_CREPES
 
   } else if (crepes_number > MAX_CREPES) {
-
     crepes_number = MAX_CREPES
-
   }
 
   setup_crepes()
 })
+
+
+//changer le nombre dans la boite en le nombre réel de crêpe, qui peut être différent
+//si l'utilisateur a rentré un nombre trop grand ou petit
 
 number_box.addEventListener("focusout", () => {
   number_box.value = crepes_number
