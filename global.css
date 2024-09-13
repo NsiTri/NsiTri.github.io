@@ -33,6 +33,7 @@ p {
 
 #spatula {
     margin-left: 100%;
+    min-height: 32px;
 }
 
 #spatula > * {
@@ -41,6 +42,7 @@ p {
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+    top: -32px;
 }
 
 
@@ -60,14 +62,14 @@ p {
     margin-left: 10%;
     margin-right: 45%;
     height: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .crepe {
     margin: auto;
-    margin-bottom: 1%;
     background: black;
     height: 32px;
-    
 }
 
 .crepe > .top {
@@ -78,7 +80,7 @@ p {
 .crepe > .bottom {
     background: black;
     height: 50%;
-    opacity: 50%
+    opacity: 50%;
 }
 
 
@@ -92,7 +94,7 @@ p {
 }
 
 .rotate {
-  animation: rotate 0.5s linear forwards; /* CHANGE IT IN  */
+  animation: rotate 0.32s ease-in-out;
 }
 
 
