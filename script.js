@@ -10,7 +10,6 @@ let is_spatula_moving = false
 const MIN_CREPES = 3
 const MAX_CREPES = 50
 
-
 //---------- SETUP ----------------------------------------------------------------
 
 
@@ -64,6 +63,8 @@ function randomizeCrepes() {
     //coté aléatoire
     if (Math.random() > 0.5) {
       crepe.style.rotate = "180deg"
+    } else {
+      crepe.style.rotate = "0deg"
     }
   }
 }
@@ -100,6 +101,9 @@ document.body.onload = setup_crepes;
 
 container.addEventListener("mousemove", (event) => {
   if (is_spatula_moving){return}
+
+  spatula.firstElementChild.style.position = "absolute"
+  spatula.style.transform = "rotateX(0deg)";
   
   const crepes = crepe_holder.querySelectorAll(".crepe");
   const mouseY = event.clientY;
@@ -117,8 +121,8 @@ container.addEventListener("mousemove", (event) => {
     }
   }
 
-
   const crepe_rect = closest_crepe.getBoundingClientRect();
+
   if (mouseY < crepe_rect.y + crepe_rect.height / 2) {
     crepe_holder.insertBefore(spatula, closest_crepe);
   } else {
@@ -153,20 +157,20 @@ function reverse_crepes(crepes){
 
     for (let crepe of crepes){
       crepe_holder.insertBefore(crepe, crepe_holder.firstChild);
-
+      
       if (crepe.style.rotate === "180deg"){
         crepe.style.rotate = "0deg"
       } else {
         crepe.style.rotate = "180deg"
       }
-
-      spatula.style.rotate = "0deg"
     }
 
+    spatula.style.rotate = "0deg"
+    spatula.style.transform = "rotateX(180deg)";
     is_spatula_moving = false
 
     crepe_holder.removeChild(rotating_div)
-  }, 500); //in ms, change it in css too
+  }, 300); //in ms, change it in css too (but a bit shorter here)
 
 }
 
@@ -175,6 +179,7 @@ function reverse_crepes(crepes){
 container.addEventListener("mousedown", (event) => {
 
   if (is_spatula_moving){return}
+  if (event.button != "0"){return} // 0 = click gauche
 
   const mouseY = event.clientY
   let top_crepes = []
@@ -182,7 +187,7 @@ container.addEventListener("mousedown", (event) => {
   for (crepe of crepe_holder.children) {
 
     if (crepe.id === "spatula") {
-      top_crepes.push(crepe); //on ajoute la spatule pour la rotation
+      top_crepes.push(crepe);
       break
     }
 
