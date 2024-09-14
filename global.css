@@ -153,9 +153,9 @@ p {
 .navbar a:visited {color: white}
 .navbar a:hover {color: red}
 
-a:link {color: red}
-a:visited {color: blueviolet}
-a:hover {color: darkcyan}
+.moreinfo a:link {color: red}
+.moreinfo a:visited {color: blueviolet}
+.moreinfo a:hover {color: darkcyan}
 
 .moreinfo {
     font-style: italic;
@@ -186,7 +186,35 @@ a:hover {color: darkcyan}
     flex: 1;
 }
 
-.son{
-    float: right;
-    justify-content: right;
+#musique{
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.allbutton{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right : 30%;
+    margin-left: 30%;
+    margin-top: 5%;
+}
+
+.btn{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.btn img{
+    width: auto;
+    height : 100px;
+    opacity: 30%;
+}
+
+.btn.active img{
+    opacity: 100%;
 }
