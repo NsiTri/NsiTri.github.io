@@ -1,8 +1,22 @@
-const MusicList = document.getElementById(".audioList")
+
+let playlist = get_random_playlist()
+let current_song = 0
+
+let btns = document.querySelectorAll(".btn");
+let audio = document.querySelector("#audio_player")
+
+let source = document.querySelector('#music_source')
+
+
+function setup_new_song(){
+    source.src = playlist[current_song]
+    audio.load()
+    audio.play()
+}
+
 
 function changeState(x){
-    let btns = document.querySelectorAll(".btn");
-    let audio = document.querySelector("#myAudio")
+    
 
     for (let i=0; i<btns.length;i++){
         btns[i].classList.remove("active");
@@ -10,21 +24,24 @@ function changeState(x){
     btns[x].classList.add("active");
 
     if(x==0){
-        audio.play();
-
+        if (playlist[current_song != source.src] || audio.currentTime == 0){
+            setup_new_song()
+        } else {
+            audio.play();
+        }
     }
 
     if(x==1){
         audio.pause();
-
     }
 
     if(x==2){
-        audio.pause();
-        audio.currentTime = 0;
-
+        audio.load()
+        audio.pause()
     }
 }
+
+
 
 function getList(){
     let list = [
@@ -61,14 +78,27 @@ function shuffle(array) {
 }
 
 
-function PlayMusic(liste){
-    change = "musique/zinnia.mp3"
-    for(let i =0;i<liste.length;i++){
-        var audio = document.getElementById('myAudio');
-        var audio = audio.firstChild;
-        var src = audio.getAttribute("src").replace(change,liste[i]);
-        audio.setAttribute("src", src);
-        let current = document.querySelector("#myAudio");
-    }
+function get_random_playlist(){
+    return shuffle(getList())
 }
 
+
+function randomize_playlist(){
+    playlist = get_random_playlist()
+    current_song = 0
+
+    console.log(playlist)
+
+    audio.load()
+    changeState(0)
+}
+
+function song_ended(){
+    console.log("ended")
+    current_song++
+    if (current_song >= playlist.length){
+        current_song = 0
+    }
+
+    setup_new_song()
+}

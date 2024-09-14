@@ -60,14 +60,14 @@
         <div id = musique>
             <hr>
             <h3>Musique</h3>
-            <div id = audioList>
-                <audio id ="myAudio"><source src="musique/zinnia.mp3" type="audio/mpeg"></audio>
+            <div>
+                <audio id ="audio_player" onended="song_ended()"><source id="music_source" src="musique/zinnia.mp3" type="audio/mpeg"></audio>
             </div>
-            <div class="allbutton">
-                <a href="javascript:void(0)" onclick="changeState(0)" class="btn"><img src="images/Play.png" alt="Jouer"></a>
-                <a href="javascript:void(0)" onclick="changeState(1)" class="btn"><img src="images/Pause.png" alt="Pause"></a>
-                <a href="javascript:void(0)" onclick="changeState(2)" class="btn active"><img src="images/Stop.png" alt="Stop"></a>
-                <a onclick="PlayMusic(shuffle(getList()))" class="btn"><img src="images/random.png" alt="Random"></a>
+            <div id="button_container">
+                <button onclick="changeState(0)" class="btn"><img src="images/Play.png" alt="Jouer"></button>
+                <button onclick="changeState(1)" class="btn"><img src="images/Pause.png" alt="Pause"></button>
+                <button onclick="changeState(2)" class="btn active"><img src="images/Stop.png" alt="Stop"></button>
+                <button onclick="randomize_playlist()" class="btn"><img src="images/random.png" alt="Random"></button>
             </div>
         </div>
         
