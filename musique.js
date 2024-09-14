@@ -62,7 +62,7 @@ function getList(){
         "musique/SongOfStorms.mp3",
         "musique/TerminaField.mp3",
         "musique/ThirdDistrict.mp3",
-        "musique/Zinnia.mp3"
+        "musique/zinnia.mp3"
     ]
     return list
 }
