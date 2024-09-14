@@ -70,6 +70,7 @@ p {
     margin: auto;
     background: black;
     height: 32px;
+    margin-top: 6px;
 }
 
 .crepe > .top {
