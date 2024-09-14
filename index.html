@@ -8,11 +8,12 @@
     </head>
 
     <body>
-
+        
         <div>
             <h1>Le jeu de la crêpe</h1>
             <hr>
         </div>  
+            
 
         <div id="menu"> <!--menu déroulant-->
             <ul class="navbar">
@@ -55,32 +56,19 @@
         <h3>Nombre de crêpes (3-50)</h3>
         <input type="number" id="number_selector" value="8">
 
-        <br>
-        <br>
-        <div id = audioList>
 
-            <audio controls><source src="musique/zinnia.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Third District.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Termina Field.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Song of Storms.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Song of healing.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/sm64staffroll.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Rosa OST Surf Music.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Reflection.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Ravios Theme.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Masked Dedede.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Lost Woods.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/littleroot town.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Last Day.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Hopes And Dreams.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Geants MM.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/gaur_plain.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Foret Korogus.mp3" type="audio/mpeg"></audio>
-            <audio controls><source src="musique/Accumula Town.mp3" type="audio/mpeg"></audio>
-
-        </div>
-        <div >
-            
+        <div id = musique>
+            <hr>
+            <h3>Musique</h3>
+            <div id = audioList>
+                <audio loop id ="myAudio"><source src="musique/zinnia.mp3" type="audio/mpeg"></audio>
+            </div>
+            <div class="allbutton">
+                <a href="javascript:void(0)" onclick="changeState(0)" class="btn"><img src="images/Play.png" alt="Jouer"></a>
+                <a href="javascript:void(0)" onclick="changeState(1)" class="btn"><img src="images/Pause.png" alt="Pause"></a>
+                <a href="javascript:void(0)" onclick="changeState(2)" class="btn active"><img src="images/Stop.png" alt="Stop"></a>
+                <a href="javascript:void(0)" onclick="" class="btn"><img src="images/random.png" alt="Random"></a>
+            </div>
         </div>
         
         <script src="musique.js"></script>
