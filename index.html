@@ -64,10 +64,10 @@
                 <audio id ="audio_player" onended="song_ended()"><source id="music_source" src="musique/zinnia.mp3" type="audio/mpeg"></audio>
             </div>
             <div id="button_container">
-                <button onclick="changeState(0)" class="btn"><img src="images/Play.png" alt="Jouer"></button>
-                <button onclick="changeState(1)" class="btn"><img src="images/Pause.png" alt="Pause"></button>
-                <button onclick="changeState(2)" class="btn active"><img src="images/Stop.png" alt="Stop"></button>
-                <button onclick="randomize_playlist()" class="btn"><img src="images/random.png" alt="Random"></button>
+                <button onclick="changeState(0)" class="btn" id = "play"><img src="images/Play.png" alt="Jouer"></button>
+                <button onclick="changeState(1)" class="btn" id = "pause"><img src="images/Pause.png" alt="Pause"></button>
+                <button onclick="changeState(2)" class="btn active" id = "stop"><img src="images/Stop.png" alt="Stop"></button>
+                <button onclick="randomize_playlist()" class="btn" id = "random"><img src="images/random.png" alt="Random"></button>
             </div>
         </div>
         
