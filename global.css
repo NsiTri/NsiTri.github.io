@@ -211,3 +211,8 @@ p {
 .btn img:hover{
     opacity: 60%;
 }
+
+.btn.active img:hover{
+    opacity: 100%;
+}
+
