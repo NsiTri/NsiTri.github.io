@@ -2,13 +2,15 @@ const spatula = document.getElementById("spatula");
 const crepe_holder = document.getElementById("crepe_holder")
 const container = document.getElementById("container");
 const number_box = document.getElementById("number_selector")
-
+const move_counter = document.getElementById("move_counter")
 
 let crepes_number = number_box.value
 let is_spatula_moving = false
 
-const MIN_CREPES = 3
-const MAX_CREPES = 50
+let moves_count = 0
+
+const MIN_CREPES = 1
+const MAX_CREPES = 100
 
 //---------- SETUP ----------------------------------------------------------------
 
@@ -88,9 +90,53 @@ function setup_crepes() {
   generateCrepes()
   textureCrepes()
   randomizeCrepes()
+
+  moves_count = 0
+  update_counter()
+
+  //si trié du premier coup par chance
+  
+  setTimeout(function(){
+    if (are_crepes_sorted()){
+      display_congrats()
+    }
+  }, 50)
+  
+  
+  
 }
 
 document.body.onload = setup_crepes;
+
+
+// ----- REUSSI ------------------------------------------------------------
+
+
+function are_crepes_sorted(){
+  let crepes = crepe_holder.querySelectorAll(".crepe")
+  let current_width = "0%"
+
+  for (let crepe of crepes){
+    if (parseInt(crepe.style.width) < parseInt(current_width)){return false}
+    if (crepe.style.rotate != "0deg"){return false}
+
+    current_width = crepe.style.width
+  }
+  return true
+}
+
+function display_congrats(){
+  alert("Bravo !\nVous avez réussi à trier " + crepes_number + " crêpes en " + moves_count + " coups !")
+}
+
+
+// ----- COMPTEUR --------------------------------------------------------
+
+function update_counter(){
+  move_counter.innerHTML = "Coups : " + moves_count
+}
+
+
 
 //------ INPUTS ---------------------------------------------------------
 
@@ -169,7 +215,15 @@ function reverse_crepes(crepes){
     spatula.style.transform = "rotateX(180deg)";
     is_spatula_moving = false
 
+    moves_count++
+    update_counter()
+
     crepe_holder.removeChild(rotating_div)
+
+    if (are_crepes_sorted()){
+      display_congrats()
+    }
+
   }, 300); //in ms, change it in css too (but a bit shorter here)
 
 }

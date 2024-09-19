@@ -221,3 +221,11 @@ p {
 .btn.active img{
     opacity: 100%;
 }
+
+
+#counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
