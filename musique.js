@@ -48,9 +48,7 @@ function getList(){
         "musique/AccumulaTown.mp3",
         "musique/ForetKorogu.mp3",
         "musique/gaur_plain.mp3",
-        "musique/GeantsMM.mp3",
         "musique/HopesAndDreams.mp3",
-        "musique/LastDay.mp3",
         "musique/littlerootTown.mp3",
         "musique/LostWoods.mp3",
         "musique/MaskedDedede.mp3",
@@ -58,11 +56,15 @@ function getList(){
         "musique/Reflection.mp3",
         "musique/RosaSurf.mp3",
         "musique/sm64staffroll.mp3",
-        "musique/SongOfHealing.mp3",
-        "musique/SongOfStorms.mp3",
         "musique/TerminaField.mp3",
-        "musique/ThirdDistrict.mp3",
-        "musique/zinnia.mp3"
+        "musique/zinnia.mp3",
+        "musique/LastGoodbye.mp3",
+        "musique/Snowy.mp3",
+        "musique/Clémenti.mp3",
+        "musique/CocoMall.mp3",
+        "musique/ForestMaze.mp3",
+        "musique/CentreBowser.mp3",
+        "musique/HyruleCastle.mp3"
     ]
     return list
 }

@@ -22,12 +22,10 @@ p {
     font-size: x-large;
 }
 
+
 .images{
     width : 50%;
 }
-
-
-
 
 
 
@@ -44,13 +42,6 @@ p {
     user-select: none;
     top: -32px;
 }
-
-
-
-
-
-
-
 
 #container {
     width: 100%;
@@ -100,10 +91,6 @@ p {
 
 
 
-
-
-
-
 #menu {
     text-align:left;
     width: 100%;
@@ -114,10 +101,6 @@ p {
     display: flex;
     justify-content: center;
   }
-
-
-
-
 
 .navbar {
     height: 50px;
@@ -157,6 +140,7 @@ p {
 .moreinfo a:visited {color: blueviolet}
 .moreinfo a:hover {color: darkcyan}
 
+
 .moreinfo {
     font-style: italic;
     text-align: center;
@@ -187,6 +171,7 @@ p {
 }
 
 
+
 #musique{
     align-items: center;
     justify-content: center;
@@ -202,6 +187,7 @@ p {
     margin-left: 30%;
     margin-top: 5%;
 }
+
 
 .btn{
     display: block;
@@ -222,6 +208,13 @@ p {
     opacity: 100%;
 }
 
+.btn img:hover{
+    opacity: 60%;
+}
+
+.btn.active img:hover{
+    opacity: 100%;
+}
 
 #counter {
     display: flex;
