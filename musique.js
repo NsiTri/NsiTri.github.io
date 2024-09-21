@@ -64,7 +64,11 @@ function getList(){
         "musique/CocoMall.mp3",
         "musique/ForestMaze.mp3",
         "musique/CentreBowser.mp3",
-        "musique/HyruleCastle.mp3"
+        "musique/RealmOverworld.mp3",
+        "musique/Athletic.mp3",
+        "musique/DragonRoostIsland.mp3",
+        "musique/MinishVillage.mp3",
+        "musique/TitleWW.mp3",
     ]
     return list
 }
