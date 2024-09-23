@@ -4,6 +4,7 @@ const container = document.getElementById("container");
 const number_box = document.getElementById("number_selector")
 const move_counter = document.getElementById("move_counter")
 
+
 let crepes_number = number_box.value
 let is_spatula_moving = false
 
@@ -250,6 +251,33 @@ container.addEventListener("mousedown", (event) => {
 
   reverse_crepes(top_crepes)
 }) 
+
+
+let irl_crepes_colors = [
+  "rgb(212,202,201)",
+  "rgb(219,123,63)",
+  "rgb(216,219,142)",
+  "rgb(108,186,76)",
+  "rgb(209,81,78)",
+  "rgb(172,172,206)",
+  "rgb(85,184,213)",
+]
+
+function textureCrepesIRL(){
+  crepes_number = 7
+  number_box.value = crepes_number
+  generateCrepes()
+
+  let crepes = crepe_holder.querySelectorAll(".crepe")
+
+  for (i = 0; i<crepes.length; i++){
+    let step = ((i+1)/crepes.length)
+    crepes[i].style.width = Math.round(step * 100).toString() + "%"
+    crepes[i].style.backgroundColor = irl_crepes_colors[i]
+  }
+
+  randomizeCrepes()
+}
 
 
 //Changer le nombre de crepes quand on change le nombre dans la boite
