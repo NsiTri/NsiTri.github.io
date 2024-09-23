@@ -3,33 +3,25 @@
         <meta charset="utf8"/>
         <meta name="google-site-verification" content="AgBQxrgUMLtHGrVNjU_3v7dt-xsy9qj5te2ilHchwaw" />
         <link rel="stylesheet" href="global.css">
+        <link rel="stylesheet" href="navbar.css">
         <title>Tris NSI</title>
         <link rel="icon" href="images/favicon.png">
     </head>
 
     <body>
+
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Jeu</a></li>
+                    <li><a href="rules.html">Règles</a></li>
+                    <li><a href="nsi.html">La NSI</a></li>
+                    <li><a href="#">Autres</a></li>
+                </ul>
+            </nav>
+        </header>
         
-        <div>
-            <h1>Le jeu de la crêpe</h1>
-            <hr>
-        </div>  
-            
-
-        <div id="menu"> <!--menu déroulant-->
-            <ul class="navbar">
-              <li>
-                <b><a href="index.html">Jeu de la crêpe</a></b>
-            </li>
-            <li>
-                <b><a href="rules.html">Règle du jeu</a></b>
-            </li>
-            <li>
-                <b><a href="nsi.html">La Nsi</a></b>
-            </li>
-            </ul>
-        </div>
-
-        <br><br>
+        <h1>Le jeu de la crêpe</h1> 
 
         <div id="container">
             <div id="crepe_holder">
@@ -47,46 +39,56 @@
         </div>
 
 
-        <br>
-        <hr>
-        <br>
-
         <div id="counter">
-            <button onclick="setup_crepes()">Mélanger</button>
+            <button class="btn btn-juicy" onclick="textureCrepesIRL()">Situation réele</button>
+            <button class="btn btn-juicy" onclick="setup_crepes()">Mélanger</button>
             <h3 id="move_counter">Coups : 0</h3>
+            
         </div>
 
-        <button onclick="textureCrepesIRL()">Couleurs réeles</button>
-        
         <br>
 
         <h3>Nombre de crêpes</h3>
         <input type="number" id="number_selector" value="8">
 
+        <br>
 
         <div id = musique>
-            <hr>
             <h3>Musique</h3>
             <div>
                 <audio id ="audio_player" onended="song_ended()"><source id="music_source" src="musique/zinnia.mp3" type="audio/mpeg"></audio>
             </div>
             <div id="button_container">
-                <button onclick="changeState(0)" class="btn" id = "play"><img src="images/Play.png" alt="Jouer"></button>
-                <button onclick="changeState(1)" class="btn" id = "pause"><img src="images/Pause.png" alt="Pause"></button>
-                <button onclick="changeState(2)" class="btn active" id = "stop"><img src="images/Stop.png" alt="Stop"></button>
-                <button onclick="randomize_playlist()" class="btn" id = "random"><img src="images/random.png" alt="Random"></button>
+                <button onclick="changeState(0)" class="btn btn-juicy music_btn" id = "play"><img src="images/Play.png" alt="Jouer"></button>
+                <button onclick="changeState(1)" class="btn btn-juicy music_btn" id = "pause"><img src="images/Pause.png" alt="Pause"></button>
+                <button onclick="changeState(2)" class="btn btn-juicy active music_btn" id = "stop"><img src="images/Stop.png" alt="Stop"></button>
+                <button onclick="randomize_playlist()" class="btn btn-juicy music_btn" id = "random"><img src="images/random.png" alt="Random"></button>
             </div>
-            <hr>
         </div>
         
         
-        <script src="musique.js"></script>
-        <script src="script.js"></script>
-
-        <br>
+       
     </body>
 
     <footer>
-        <p>credits ou qqch</p>
+        <input type="checkbox" id="random_colors_check"> Couleurs aléatoires
     </footer>
+
+
+
+    <script src="musique.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        if (localStorage.getItem("random_colors_check") === "true"){
+            Array.prototype.random = function(){
+                return this[Math.floor((Math.random()*this.length))];
+            }
+
+            const possible_colors = ["orange", "purple", "navy", "green", "teal"]
+            
+            document.documentElement.style.backgroundColor = possible_colors.random()
+        }
+    </script>
 </html>
+

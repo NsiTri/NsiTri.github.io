@@ -3,6 +3,7 @@ const crepe_holder = document.getElementById("crepe_holder")
 const container = document.getElementById("container");
 const number_box = document.getElementById("number_selector")
 const move_counter = document.getElementById("move_counter")
+const random_colors_check = document.getElementById("random_colors_check")
 
 
 let crepes_number = number_box.value
@@ -103,6 +104,13 @@ function setup_crepes() {
     }
   }, 50)
   
+  
+  //couleurs
+  if (localStorage.getItem("random_colors_check") === "true"){
+    random_colors_check.checked = true
+  } else {
+    random_colors_check.checked = false
+  };
   
   
 }
@@ -301,4 +309,17 @@ number_box.addEventListener("input", () => {
 
 number_box.addEventListener("focusout", () => {
   number_box.value = crepes_number
+})
+
+
+
+
+
+//each time we change the checkbox
+random_colors_check.addEventListener('change', function () {
+  if (random_colors_check.checked) {
+      localStorage.setItem('random_colors_check', 'true');
+  } else {
+      localStorage.setItem('random_colors_check', 'false');
+  }
 })

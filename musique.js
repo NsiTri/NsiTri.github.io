@@ -2,7 +2,7 @@
 let playlist = get_random_playlist()
 let current_song = 0
 
-let btns = document.querySelectorAll(".btn");
+let btns = document.querySelectorAll(".music_btn");
 let audio = document.querySelector("#audio_player")
 
 let source = document.querySelector('#music_source')
