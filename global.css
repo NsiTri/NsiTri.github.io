@@ -248,3 +248,27 @@ footer input {
     align-items: center;
     gap: 10px;
 }
+
+table{
+    width: 80%;
+    height: 64px;
+    margin: auto;
+    border: 1px solid white;
+    border-collapse: separate;
+}
+
+th {
+    text-align: center;
+    border: 1px solid white;
+    height: 100px;
+}
+
+td {
+    text-align: center;
+    border: 1px solid white;
+    height: 40px;
+}
+
+.case {
+    width: 33%;
+}

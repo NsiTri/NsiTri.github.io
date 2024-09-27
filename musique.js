@@ -69,6 +69,8 @@ function getList(){
         "musique/DragonRoostIsland.mp3",
         "musique/MinishVillage.mp3",
         "musique/TitleWW.mp3",
+        "musique/Poivressel.mp3",
+
     ]
     return list
 }
